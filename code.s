@@ -1,43 +1,47 @@
 	.file	"code.c"
-	.section	.rodata.str1.1,"aMS",@progbits,1
+	.section	.rodata
 .LC0:
 	.string	"%u"
-	.section	.text.startup,"ax",@progbits
-	.p2align 4,,15
+	.text
 	.globl	main
 	.type	main, @function
 main:
-.LFB24:
+.LFB0:
 	.cfi_startproc
-	subq	$24, %rsp
-	.cfi_def_cfa_offset 32
-	xorl	%eax, %eax
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	leaq	-8(%rbp), %rax
+	movq	%rax, %rsi
 	movl	$.LC0, %edi
-	leaq	12(%rsp), %rsi
+	movl	$0, %eax
 	call	__isoc99_scanf
-	movl	12(%rsp), %eax
-	xorl	%edx, %edx
-	testl	%eax, %eax
-	je	.L2
-	.p2align 4,,10
-	.p2align 3
-.L4:
-	movl	%eax, %ecx
-	andl	$1, %ecx
-	addl	%ecx, %edx
+	movl	$0, -4(%rbp)
+	jmp	.L2
+.L3:
+	movl	-8(%rbp), %eax
+	andl	$1, %eax
+	addl	%eax, -4(%rbp)
+	movl	-8(%rbp), %eax
 	shrl	%eax
-	jne	.L4
-	movl	$0, 12(%rsp)
+	movl	%eax, -8(%rbp)
 .L2:
-	movl	$.LC0, %esi
-	movl	$1, %edi
-	xorl	%eax, %eax
-	call	__printf_chk
-	addq	$24, %rsp
-	.cfi_def_cfa_offset 8
+	movl	-8(%rbp), %eax
+	testl	%eax, %eax
+	jne	.L3
+	movl	-4(%rbp), %eax
+	movl	%eax, %esi
+	movl	$.LC0, %edi
+	movl	$0, %eax
+	call	printf
+	leave
+	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE24:
+.LFE0:
 	.size	main, .-main
 	.ident	"GCC: (Ubuntu 4.8.4-2ubuntu1~14.04.3) 4.8.4"
 	.section	.note.GNU-stack,"",@progbits
