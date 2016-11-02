@@ -1,6 +1,5 @@
-#Assembly program using ISA of MIPS 32-bit
+#Assembly program written in MIPS 32-bit ISA.
 
-Todo :
-* Learn writing MIPS code.
-* Write MIPS code. :P
-
+### Problem statement:
+Q. Take a number N as input from the user and store in memory. Determine the number of bits which are set in
+the 32-bit variable N, storing the result in the B variable. Print the saved result in B from memory.
