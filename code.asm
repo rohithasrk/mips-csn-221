@@ -1,6 +1,6 @@
 .data
-	prompt: .ascizz "Enter a number: "
-	message: .ascizz "The number of bits set are: "
+	prompt: .asciiz "Enter a number: "
+	message: .asciiz "\n The number of bits set are: "
 .text
 .globl main
 
@@ -17,8 +17,18 @@ main:
 	# To store the number in $t0
 	move $t0, $v0
 	
-	//Code
+	# Declaring temp registers
+	li $t1, 0 		# Stores 0
+	li $t2, 0		# Stores count
 
+loop:
+	beq $t0, $t1, next
+	andi $t3, $t0, 1
+	add $t2, $t2, $t3
+	srl $t0, $t0, 1
+	j loop
+	
+next:
 	# Display the message
 	li $v0, 4
 	la $a0, message
@@ -26,7 +36,7 @@ main:
 	
 	# To print the number of set bits
 	li $v0, 1
-	move $a0, $t0
+	move $a0, $t2
 	syscall
 
 end:
