@@ -17,7 +17,7 @@
 main:
 	# To print the prompt message
 	li $v0, 4
-	la, $a0, prompt
+	la $a0, prompt
 	syscall
 
 	# To get the user input
